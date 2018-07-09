@@ -476,16 +476,6 @@ type QueryRoot {
 }
 ```
 
-You can also add annotations at a global level like this, which for now are only
-used to create GraphQL unions:
-
-```
-annotations {
-  @lang/lacinia union SearchResult Type1 Type2
-}
-```
-
-
 ## Spec Generator
 
 Umlaut can generate spec code based on your schema. This is a more complex generator that
@@ -513,7 +503,7 @@ A simple example, the following umlaut file...
 
 ```
 type Person {
-  name: String 
+  name: String
   relationshipStatus: RelationshipStatus {
     @doc "Whether the person is married or single."
   }
