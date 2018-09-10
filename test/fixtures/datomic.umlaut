@@ -46,6 +46,11 @@ type Location {
   }
 }
 
+@lang/datomic skip true
+type OtherLocation {
+  name: String
+}
+
 type Employee {
   tenKId: Integer {
     @lang/datomic unique identity

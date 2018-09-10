@@ -28,6 +28,17 @@
            first
            :value))
 
+(defn ^:private should-skip?
+  "Returns true if the node is annotated with @lang/datomic skip true"
+  [[_ node]]
+  (let [annotation-val (->> node
+                            second
+                            :annotations
+                            (utils/annotations-by-space-key "lang/datomic" "skip")
+                            first
+                            :value)]
+    (= "true" annotation-val)))
+
 (defmulti ^:private gen-value-type
   "Given a field, returns the Datomic :db/valueType"
   (fn [field] (-> field :return :type-id)))
@@ -152,6 +163,7 @@
                    utils/resolve-inheritance)
         nodes (->> umlaut
                    :nodes
+                   (remove should-skip?)
                    (filter is-type-or-enum?)
                    (filter has-simple-fields?)
                    (sort-by #(first %)))]

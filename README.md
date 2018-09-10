@@ -656,6 +656,19 @@ type Person {
 }
 ```
 
+### Excluding types from datomic generation
+
+Types can be excluded from datomic generation with the annotation `@lang/datomic skip true`
+
+```
+@lang/datomic skip true
+type Person {
+  name: String {
+    @lang/datomic fulltext true
+  }
+}
+```
+
 ### Datomic Components
 
 Non-primitive Umlaut types are translated to Datomic ref attributes. These can
